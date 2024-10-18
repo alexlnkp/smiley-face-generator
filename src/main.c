@@ -13,6 +13,8 @@
 #define EYES_RADIUS 24
 #define SMILE_RADIUS_DELTA 50
 
+#define EYE_MOVE_SPEED 10
+
 #define M_PI 3.14159265358979323846
 
 int i0_x, i0_y; // todo: fix this ugliness somehow

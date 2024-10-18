@@ -44,9 +44,23 @@ void poll_events(SDL_Event* restrict e, window_state_t* restrict ws) {
             ws->wants_to_quit = true;
         }
         if (e->type == SDL_KEYDOWN) {
-            if (e->key.keysym.sym == SDLK_r) {
+            switch (e->key.keysym.sym) {
+            case SDLK_r: {
                 randomPointInCircle(HALF_WW - (ELLIPSIS_LINE_WIDTH >> 1) - EYES_RADIUS, HALF_WW, HALF_WH, &i0_x, &i0_y);
                 randomPointInCircle(HALF_WW - (ELLIPSIS_LINE_WIDTH >> 1) - EYES_RADIUS, HALF_WW, HALF_WH, &i1_x, &i1_y);
+            } break;
+
+            case SDLK_w: i0_y -= EYE_MOVE_SPEED; break;
+            case SDLK_s: i0_y += EYE_MOVE_SPEED; break;
+
+            case SDLK_a: i0_x -= EYE_MOVE_SPEED; break;
+            case SDLK_d: i0_x += EYE_MOVE_SPEED; break;
+
+            case SDLK_UP:    i1_y -= EYE_MOVE_SPEED; break;
+            case SDLK_DOWN:  i1_y += EYE_MOVE_SPEED; break;
+
+            case SDLK_LEFT:  i1_x -= EYE_MOVE_SPEED; break;
+            case SDLK_RIGHT: i1_x += EYE_MOVE_SPEED; break;
             }
         }
     }

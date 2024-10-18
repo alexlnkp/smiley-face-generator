@@ -47,7 +47,7 @@ void SDL_RenderHollowEllipse(SDL_Renderer* r, int x0, int y0, int radiusX, int r
     }
 }
 
-void SDL_RenderFilledEllipse(SDL_Renderer* r, int x0, int y0, int radiusX, int radiusY) {
+void SDL_RenderFilledEllipse(SDL_Renderer* R, int x0, int y0, int radiusX, int radiusY, Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
     float pih = M_PI / 2.0; // half of pi
 
     const int prec = 54; // precision value; value of 1 will draw a diamond, 27 makes pretty smooth circles.
@@ -63,7 +63,7 @@ void SDL_RenderFilledEllipse(SDL_Renderer* r, int x0, int y0, int radiusX, int r
 
         // draw horizontal lines from -x1 to +x1 at y0 - y1 and y0 + y1
         for (int y = -y1; y <= y1; y++) {
-            thickLineRGBA(r, x0 - x1, y0 + y, x0 + x1, y0 + y, ELLIPSIS_LINE_WIDTH, 0, 0, 0, 255);
+            thickLineRGBA(R, x0 - x1, y0 + y, x0 + x1, y0 + y, ELLIPSIS_LINE_WIDTH, r, g, b, a);
         }
     }
 }
@@ -131,8 +131,8 @@ void render_everything(window_ctx_t* w_ctx) {
         SDL_SetRenderDrawColor(w_ctx->renderer, 0, 0, 0, 255);
         SDL_RenderHollowEllipse(w_ctx->renderer, HALF_WW, HALF_WH, HALF_WW - (ELLIPSIS_LINE_WIDTH >> 1), HALF_WH - (ELLIPSIS_LINE_WIDTH >> 1));
         
-        SDL_RenderFilledEllipse(w_ctx->renderer, i0_x, i0_y, EYES_RADIUS, EYES_RADIUS);
-        SDL_RenderFilledEllipse(w_ctx->renderer, i1_x, i1_y, EYES_RADIUS, EYES_RADIUS);
+        SDL_RenderFilledEllipse(w_ctx->renderer, i0_x, i0_y, EYES_RADIUS, EYES_RADIUS, 0, 0, 0, 255);
+        SDL_RenderFilledEllipse(w_ctx->renderer, i1_x, i1_y, EYES_RADIUS, EYES_RADIUS, 0, 0, 0, 255);
 
         drawArcBetweenPoints(w_ctx->renderer, HALF_WW, HALF_WH, HALF_WW - (ELLIPSIS_LINE_WIDTH >> 1) - SMILE_RADIUS_DELTA, i0_x, i0_y, i1_x, i1_y);
 
