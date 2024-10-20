@@ -3,7 +3,9 @@
 
 #include <SDL2/SDL2_gfxPrimitives.h>
 
-/* based on this function: https://stackoverflow.com/a/47766167/25145880 */
+/* based on this function: https://stackoverflow.com/a/47766167/25145880
+ * under this license: https://creativecommons.org/licenses/by-sa/3.0/
+ */
 void SDL_RenderHollowEllipse(SDL_Renderer* r, int x0, int y0, int radiusX, int radiusY) {
     float pih = M_PI / 2.0; // half of pi
 
