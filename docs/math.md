@@ -150,3 +150,7 @@ int y2 = ((float)centerY + (float)radius * sinf(theta2) + 0.5f);
 
 We also add $0.5$ to the results for proper rounding when casting from `float` to `int` (refer to how **C** casts between `float` and `int`).
 
+After all that, we end up with something like this
+![funny](funny.png)
+
+With two "eyes" being our points, which dictate from where to where we draw the arc, the "smile".
