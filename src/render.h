@@ -78,10 +78,10 @@ void SDL_RenderArc(SDL_Renderer* r, int centerX, int centerY, int radius, float 
         float theta1 = startAngle + i * angleStep;
         float theta2 = startAngle + (i + 1) * angleStep;
 
-        int x1 = (int)((double)centerX + (double)radius * cos(theta1));
-        int y1 = (int)((double)centerY + (double)radius * sin(theta1));
-        int x2 = (int)((double)centerX + (double)radius * cos(theta2));
-        int y2 = (int)((double)centerY + (double)radius * sin(theta2));
+        int x1 = ((float)centerX + (float)radius * cosf(theta1) + 0.5f);
+        int y1 = ((float)centerY + (float)radius * sinf(theta1) + 0.5f);
+        int x2 = ((float)centerX + (float)radius * cosf(theta2) + 0.5f);
+        int y2 = ((float)centerY + (float)radius * sinf(theta2) + 0.5f);
 
         // draw line segment between (x1, y1) and (x2, y2)
         thickLineRGBA(r, x1, y1, x2, y2, ELLIPSIS_LINE_WIDTH, 0, 0, 0, 255);
