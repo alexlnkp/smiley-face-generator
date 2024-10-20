@@ -38,7 +38,45 @@ void deinit_window_ctx(window_ctx_t** w_ctx) {
     free(*w_ctx);
 }
 
-void poll_events(SDL_Event* restrict e, window_state_t* restrict ws) {
+/* Based on this gist: https://gist.github.com/malja/2193bd656fe50c203f264ce554919976
+ * By Jan Malčák (https://gist.github.com/malja)
+ */
+bool saveScreenshot(const char* file, SDL_Renderer *renderer ) {
+    // Used temporary variables
+    SDL_Rect _viewport;
+    SDL_Surface *_surface = NULL;
+    
+    // Get viewport size
+    SDL_RenderGetViewport( renderer, &_viewport);
+    
+    // Create SDL_Surface with depth of 32 bits
+    _surface = SDL_CreateRGBSurface( 0, _viewport.w, _viewport.h, 32, 0, 0, 0, 0 );
+    
+    // Check if the surface is created properly
+    if ( _surface == NULL ) {
+        return false;
+    }
+    
+    // Get data from SDL_Renderer and save them into surface
+    if ( SDL_RenderReadPixels( renderer, NULL, _surface->format->format, _surface->pixels, _surface->pitch ) != 0 ) {
+        // Don't forget to free memory
+        SDL_FreeSurface(_surface);
+        return false;
+    }
+    
+    // Save screenshot as PNG file
+    if ( IMG_SavePNG( _surface, file ) != 0 ) {
+        // Free memory
+        SDL_FreeSurface(_surface);
+        return false;
+    }
+    
+    // Free memory
+    SDL_FreeSurface(_surface);
+    return true;
+}
+
+void poll_events(SDL_Event* restrict e, window_state_t* restrict ws, window_ctx_t* restrict wctx) {
     while (SDL_PollEvent(e)) {
         if (e->type == SDL_QUIT) {
             ws->wants_to_quit = true;
@@ -61,6 +99,8 @@ void poll_events(SDL_Event* restrict e, window_state_t* restrict ws) {
 
             case SDLK_LEFT:  i1_x -= EYE_MOVE_SPEED; break;
             case SDLK_RIGHT: i1_x += EYE_MOVE_SPEED; break;
+
+            case SDLK_RETURN: saveScreenshot("./img.png", wctx->renderer); break;
             }
         }
     }

@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
     nob_cmd_append(&cmd, "-Wall", "-Wextra", "-Wpedantic");
     nob_cmd_append(&cmd, "-o", "out/main");
     nob_cmd_append(&cmd, "src/main.c");
-    nob_cmd_append(&cmd, "-lSDL2", "-lm", "-lSDL2_gfx");
+    nob_cmd_append(&cmd, "-lSDL2", "-lm", "-lSDL2_gfx", "-lSDL2_image");
     
     nob_cmd_run_sync(cmd);
 

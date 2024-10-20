@@ -2,6 +2,7 @@
 #include <time.h>
 #include <stdbool.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 1024
@@ -39,7 +40,7 @@ int main(void) {
     
     SDL_Event e;
     while (!ws.wants_to_quit) {
-        poll_events(&e, &ws);
+        poll_events(&e, &ws, w_ctx);
 
         render_everything(w_ctx);
     }
