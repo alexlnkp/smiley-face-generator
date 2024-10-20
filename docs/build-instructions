@@ -1,0 +1,23 @@
+################PREREQUISITES################
+SDL2 library:
+    download SDL2
+    build SDL2
+    run `cmake --install` on the build directory
+
+SDL2_gfx library:
+    download SDL2_gfx
+    build SDL2_gfx
+    run `make install`
+
+depending on where the libraries were installed to (either `usr/local` or just `usr`), you either add `nob_cmd_append(&cmd, "-L/usr/local/lib");` to the `nob.c` (before "-l" flags but after source ("*.c") files) or not respectively.
+#############################################
+
+
+
+##################BUILDING###################
+building the random smiley face generator:
+    run `cc -o nob nob.c`
+    run `./nob`
+
+there should be NO ERRORS WHATSOEVER. IF YOU GET ERRORS SAYING SOMETHING ABOUT THE MISSING SYMBOLS OR INCLUDES - YOU'RE MISSING SOME OF THE LIBRARIES!!!
+#############################################
